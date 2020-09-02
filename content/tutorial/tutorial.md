@@ -1090,18 +1090,18 @@ Keys do not need to be globally unique; they only need to be unique between comp
 
 ### Implementing Time Travel {#implementing-time-travel}
 
-In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. The moves are never re-ordered, deleted, or inserted in the middle, so it's safe to use the move index as a key.
+In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. The moves are never re-ordered, deleted, or inserted in the middle, so it's safe to use the step index as a key.
 
-In the Game component's `render` method, we can add the key as `<li key={move}>` and React's warning about keys should disappear:
+In the Game component's `render` method, we can add the key as `<li key={step}>` and React's warning about keys should disappear:
 
 ```js{6}
-    const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
+    const moves = history.map((move, step) => {
+      const desc = step ?
+        'Go to move #' + step :
         'Go to game start';
       return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+        <li key={step}>
+          <button onClick={() => this.jumpTo(step)}>{desc}</button>
         </li>
       );
     });
